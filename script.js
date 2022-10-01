@@ -4,9 +4,9 @@ const data = window.data;
 // Make your References to the two DOM nodes
 
 // Create a reference to the element who's ID is 'big_coffee and call it bigCoffee
-let bigCoffee = document.getElementById("big_coffee");
+const bigCoffee = document.getElementById("big_coffee");
 // Create a reference to the element who's ID is 'producer_container' and call it producerContainer
-let producerContainer = document.getElementById("producer_container");
+const producerContainer = document.getElementById("producer_container");
 /**************
  *   SLICE 1
  **************/
@@ -20,7 +20,7 @@ function updateCoffeeView(coffeeQty) {
 
 function clickCoffee(data) {
   // Increment the data object's (passed into this function) coffee property by one
-  coffeeCounter = coffeeCounter + 1;
+  data.coffee += 1;
   // call the updateCoffeeView function and pass it the newly updated data.coffee property
   updateCoffeeView(data.coffee);
   // call the renderProducers function and pass it the data object
@@ -159,9 +159,9 @@ function buyButtonClick(event, data) {
 function tick(data) {
   // increment the data object's (passed into this function)
   // coffee property by the data.totalCPS amount
-
+  data.coffee += data.totalCPS;
   // call the updateCoffeeView function and pass it the data.coffee property
-
+  updateCoffeeView(data.coffee);
   // call the renderProducers function and pass it the newly updated data object
   renderProducers(data);
 }
@@ -169,10 +169,16 @@ function tick(data) {
 // Event Listeners
 
 // add a 'click' event listener to the bigCoffee element (that you referenced above)
-// the event listener should call the clickCoffee function, and pass in the global data object
+bigCoffee.addEventListener("click", function () {
+  // the event listener should call the clickCoffee function, and pass in the global data object
+  clickCoffee(data);
+});
 
 // add a 'click' event listener to the element (referenced at the top of the file)
-// the event listener should call the buyButtonClick function and pass it the event, and the global data object
-
+producerContainer.addEventListener("click", function (event) {
+  // the event listener should call the buyButtonClick function and pass it the event, and the global data object
+  buyButtonClick(event, data);
+  console.log(producerContainer);
+});
 // You do not need to edit this last line. This simple runs your tick function every 1000ms, or 1s
 setInterval(() => tick(data), 1000);
