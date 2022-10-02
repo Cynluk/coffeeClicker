@@ -31,13 +31,14 @@ function clickCoffee(data) {
  *   SLICE 2
  **************/
 function unlockProducers(producers, coffeeCount) {
-  // loop through the producers array passed into the function
-  for (let i = producers; i < producers.length; i++) {
-    // for each producer, if the coffeeCount (passed in) is greater than or equal
-    if (coffeeCount >= producers.price / 2);
-    // to half the producer's price, reassign the producers.unlocked property to equal true
-    return (producers.unlocked = true);
-  }
+  //loop through the producers array passed into the function
+  // for each producer, if the coffeeCount (passed in) is greater than or equal
+  producers.forEach(function (eachProducer) {
+    if (coffeeCount >= eachProducer.price / 2) {
+      // to half the producer's price, reassign the producers.unlocked property to equal true
+      return (eachProducer.unlocked = true);
+    }
+  });
 }
 
 function getUnlockedProducers(data) {
@@ -178,7 +179,7 @@ bigCoffee.addEventListener("click", function () {
 producerContainer.addEventListener("click", function (event) {
   // the event listener should call the buyButtonClick function and pass it the event, and the global data object
   buyButtonClick(event, data);
-  console.log(producerContainer);
+  // console.log(producerContainer);
 });
 // You do not need to edit this last line. This simple runs your tick function every 1000ms, or 1s
 setInterval(() => tick(data), 1000);
